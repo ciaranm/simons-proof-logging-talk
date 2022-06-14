@@ -108,8 +108,9 @@ keywordstyle=[2]\color{uofgcobalt}}
             \begin{minipage}{0.65\paperwidth}\raggedright
                 {\usebeamerfont{title}\usebeamercolor[white]{}\inserttitle}\\[0.1cm]
                 {\usebeamerfont{author}\usebeamercolor[white]{}\insertauthor}\\[0.1cm]
-                {\usebeamerfont{author}\usebeamercolor[white]{}\small And numerous unindicted
-                co-conspirators, including\\Bart Bogaerts, Stephan Gocht, and Jakob Nordstr\"{o}m.}
+                {\usebeamerfont{author}\usebeamercolor[white]{}And numerous unindicted
+                co-conspirators, including\\Bart Bogaerts, Stephan Gocht, Ross McBride,\\
+                James Trimble, Jakob Nordstr\"{o}m, and Patrick Prosser}
             \end{minipage}
         };
     \end{tikzpicture}
@@ -242,6 +243,26 @@ keywordstyle=[2]\color{uofgcobalt}}
     \end{frame}
 }
 
+\section{Demotivation}
+
+\begin{frame}{The Slide That Got Me Into Trouble}
+    \begin{itemize}
+        \item For somewhere between 0.1\% (my clique experiments) and 1.28\% (MiniZinc challenge
+            2021) of instances, we get the wrong solution.
+            \begin{itemize}
+                \item False claims of unsatisfiability.
+                \item False claims of optimality.
+                \item Infeasible solutions produced.
+                \item The same solver run on the same instance on the same hardware twice in a row
+                    can claim both unsatisfiability and satisfiability.
+            \end{itemize}
+        \item This includes academic and commercial CP and MIP solvers.
+        \item Extensive testing hasn't fixed this.
+        \item Formal methods are far from being able to handle solvers.
+        \item The situation for SAT solvers is somewhat better.
+    \end{itemize}
+\end{frame}
+
 \section{Proof Logging}
 
 \begin{frame}{Proof Logging}
@@ -341,6 +362,7 @@ keywordstyle=[2]\color{uofgcobalt}}
                 \item OK, we'll stick to NP decision and optimisation for now.
             \end{itemize}
         \item Support both retrofitting and proof-driven development.
+        \item Call it ``auditable solving''.
     \end{itemize}
 \end{frame}
 
@@ -386,11 +408,42 @@ keywordstyle=[2]\color{uofgcobalt}}
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Unexpected and Remarkable Claim}
+\begin{frame}[fragile]{Unexpected and Remarkable Claim}
+    \only<1-3>{
     \begin{itemize}
         \item We can do everything we want with a proof format which is only slightly more
             sophisticated than DRAT.
-    \end{itemize}
+        \item <2-> Using proof logs during development leads to faster development than not doing proof logging.
+        \item <3-> You should make your students and postdocs adopt this technology right now.
+    \end{itemize}}\begin{onlyenv}<4>
+\tiny\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`^=7}]
+Dear Don,
+
+A quick note on my experiences trying to solve the Sierpinski Gasket graphs:
+
+I tried the latest version of Armin Biere's Kissat solver (
+https://github.com/arminbiere/kissat ) using the most obvious SAT encoding, and
+got the following run times:
+
+S_6      0.02 seconds
+S_7      0.12 seconds
+S_8      0.73 seconds
+S_9      3.92 seconds
+S_10    27.81 seconds
+S_11   160.37 seconds
+S_12   716.13 seconds
+
+[...]
+
+Finally, I tried the program from the following paper. Unfortunately, it seems
+to give incorrect answers for some of these instances.
+
+\textcolor{red}{Citation removed to protect the guilty.}
+
+Best regards,
+James
+\end{Verbatim}
+    \end{onlyenv}
 \end{frame}
 
 %%%\begin{frame}{From CNF to Pseudo-Boolean Problems}
@@ -948,7 +1001,7 @@ c \textcolor{uofgrose}{done} 0
     \end{itemize}
 \end{frame}
 
-\section{Common (Connected) Subgraph}
+\section{Common Subgraph}
 
 \begin{frame}{Maximum Common Subgraph}
     \centering
@@ -1476,6 +1529,7 @@ j -1 1 ~xp_t >= 1 ; * and simplify the above
         \item Proof-related:
             \begin{itemize}
                 \item ``Lemmas'', or substitution proofs?
+                \item Counting that isn't just enumeration.
                 \item Approximate counting, uniform sampling, etc? Pareto fronts?
                 \item Proof trimming or minimisation?
             \end{itemize}
@@ -1484,6 +1538,10 @@ j -1 1 ~xp_t >= 1 ; * and simplify the above
                 \item Symmetric explanation learning.
                 \item The 400 remaining global constraints I've not done yet.
                 \item Every single dedicated solving algorithm ever.
+            \end{itemize}
+        \item Beyond proofs:
+            \begin{itemize}
+                \item Proof mining for experimental algorithmics?
             \end{itemize}
     \end{itemize}
 \end{frame}
